@@ -15,7 +15,7 @@ namespace CheckIn
 
         public List<string> PesonalBelongings { get; set; }
 
-        public Passenger (string fullName)
+        public Passenger(string fullName)
         {
             FullName = fullName;
         }
@@ -23,10 +23,20 @@ namespace CheckIn
     internal class BoardingPass
     {
         public string PassengerSeat { get; set; }
-        
+
         public BoardingPass(string passengerSeat)
         {
             PassengerSeat = passengerSeat;
+        }
+    }
+
+    internal class BaggageLabel
+    {
+        public int WeightBaggage { get; set; }
+
+        public BaggageLabel(int weightBaggage)
+        {
+            WeightBaggage = weightBaggage;
         }
     }
 }

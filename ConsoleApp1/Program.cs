@@ -24,16 +24,11 @@ namespace CheckIn
                 }
             }
 
-            // baggage
-
-
-
-            var secCheck = new SecurityCheckDesk(new ConsoleInputOutput());
-            secCheck.CheckPassenger(passenger);
-
-
+            if (greeting.CheckBaggage())
+            {
+                BaggageRegistrationDesk baggageRegistrationDesk = new BaggageRegistrationDesk(new ConsoleInputOutput(), new InMemoryAirFlightRepository());
+                BaggageLabel baggageLabel = new BaggageLabel(baggageRegistrationDesk.WeightBaggage());
+            }
         }
-
-
     }
 }
