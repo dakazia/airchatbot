@@ -45,6 +45,19 @@ namespace CheckIn.AirportDepartment
         public bool CheckERegistration()
         {
             _inputOutput.WriteLine("Do you have E-Registraition?");
+           
+            return AskYesOrNo();
+        }
+
+        public bool CheckBaggage()
+        {
+            _inputOutput.WriteLine("Do you have any baggage for registration?");
+
+            return AskYesOrNo();
+        }
+
+        public bool AskYesOrNo()
+        {
             string answer;
             do
             {
