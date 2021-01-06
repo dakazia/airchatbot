@@ -4,7 +4,7 @@ using System.Text;
 using CheckIn.AirportDepartment;
 using CheckIn.Services;
 
-namespace CheckIn
+namespace CheckIn.AirportDepartment
 {
     internal class BaggageRegistrationDesk
     {
@@ -42,7 +42,7 @@ namespace CheckIn
 
             if (weightBaggage >= 32)
             {
-                return null;
+                throw new ArgumentOutOfRangeException($"{nameof(weightBaggage)} cannot exceed 32 kilograms for passenger transportation.");
             }
             return new BaggageLabel(weightBaggage);
         }

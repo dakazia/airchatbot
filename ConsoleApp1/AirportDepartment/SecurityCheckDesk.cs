@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CheckIn.Services;
 
 namespace CheckIn.AirportDepartment
 {
-    class SecurityCheckDesk
+    internal class SecurityCheckDesk
     {
-        private readonly IInputOutput _inputOutput;
+        /*private readonly IInputOutput _inputOutput;
 
         public SecurityCheckDesk(IInputOutput inputOutput)
         {
@@ -29,6 +30,6 @@ namespace CheckIn.AirportDepartment
     {
         public bool IsOkay { get; set; }
 
-        public List<string> ForbiddenItems { get; set; }
+        public List<string> ForbiddenItems { get; set; } */
     }
 }

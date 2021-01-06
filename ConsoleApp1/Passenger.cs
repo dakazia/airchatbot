@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CheckIn
 {
-    class Passenger
+    internal class Passenger
     {
 
         public string FullName { get; set; }

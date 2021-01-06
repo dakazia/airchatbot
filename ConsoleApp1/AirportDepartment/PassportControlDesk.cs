@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CheckIn
+namespace CheckIn.AirportDepartment
 {
-    class PassportControlDesk
+    internal class PassportControlDesk
     {
     }
 }

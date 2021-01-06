@@ -6,23 +6,23 @@ using System.Text;
 
 namespace CheckIn.AirportDepartment
 {
-    internal class CheckinDesk
+    internal class CheckInDesk
     {
         private readonly IInputOutput _inputOutput;
         private readonly IAirFlightRepository _airFlightRepository;
 
-        public CheckinDesk(IInputOutput inputOutput, IAirFlightRepository airFlightRepository)
+        public CheckInDesk(IInputOutput inputOutput, IAirFlightRepository airFlightRepository)
         {
             _inputOutput = inputOutput;
             _airFlightRepository = airFlightRepository;
         }
 
-        public bool Checkin(Passenger passenger)
+        public bool CheckIn(Passenger passenger)
         {
             _inputOutput.WriteLine($"Dear {passenger.FullName}, please enter your passportID.");
-            string passportID = _inputOutput.ReadLine();
+            string passportId = _inputOutput.ReadLine();
 
-            if (_airFlightRepository.CheckBooking(passportID))
+            if (_airFlightRepository.CheckBooking(passportId))
             {
                 _inputOutput.WriteLine("Thank you, all ok.");
                 return true;
@@ -34,11 +34,11 @@ namespace CheckIn.AirportDepartment
             }
         }
 
-        public BoardingPass ChoiseSeat()
+        public BoardingPass ChooseSeat()
         {
-            _inputOutput.WriteLine("Now let choise seat on bord from these seats:");
+            _inputOutput.WriteLine("Now let choice seat on board from these seats:");
 
-            foreach (var item in _airFlightRepository.GetAvaleableSeats())
+            foreach (var item in _airFlightRepository.GetAvailableSeats())
             {
                 _inputOutput.WriteLine(item);
             }
@@ -49,10 +49,12 @@ namespace CheckIn.AirportDepartment
             {
                 _inputOutput.WriteLine("Please, enter your choice");
                 bookingSeat = _inputOutput.ReadLine();
-                _airFlightRepository.ReserveSeats(bookingSeat);
-            } while (!(_airFlightRepository.GetAvaleableSeats().Contains(bookingSeat)));
+            } while (!_airFlightRepository.GetAvailableSeats().Contains(bookingSeat));
+
+            _airFlightRepository.ReserveSeats(bookingSeat);
 
             return new BoardingPass(bookingSeat);
         }
     }
 }
+

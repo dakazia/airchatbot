@@ -5,7 +5,7 @@ namespace CheckIn
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             GreetingDesk greeting = new GreetingDesk(new ConsoleInputOutput());
             string fullName = greeting.Greet();
@@ -13,10 +13,10 @@ namespace CheckIn
 
             if (!greeting.CheckERegistration())
             {
-                CheckinDesk checkinDesk = new CheckinDesk(new ConsoleInputOutput(), new InMemoryAirFlightRepository());
-                if (checkinDesk.Checkin(passenger))
+                CheckInDesk checkInDesk = new CheckInDesk(new ConsoleInputOutput(), new InMemoryAirFlightRepository());
+                if (checkInDesk.CheckIn(passenger))
                 {
-                    BoardingPass boardingPass = checkinDesk.ChoiseSeat();
+                    BoardingPass boardingPass = checkInDesk.ChooseSeat();
                 }
                 else
                 {

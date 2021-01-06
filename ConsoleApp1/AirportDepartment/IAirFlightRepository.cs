@@ -6,8 +6,8 @@ namespace CheckIn.AirportDepartment
 {
     public interface IAirFlightRepository
     {
-        IReadOnlyList<string> GetAvaleableSeats();
+        IReadOnlyList<string> GetAvailableSeats();
         void ReserveSeats(string bookingSeat);
-        bool CheckBooking(string passportID);
+        bool CheckBooking(string passportId);
     }
 }

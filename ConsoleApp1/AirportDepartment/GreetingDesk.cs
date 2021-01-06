@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CheckIn.AirportDepartment
 {
-    class GreetingDesk
+    internal class GreetingDesk
     {
         private readonly IInputOutput _inputOutput;
 
@@ -44,7 +44,7 @@ namespace CheckIn.AirportDepartment
 
         public bool CheckERegistration()
         {
-            _inputOutput.WriteLine("Do you have E-Registraition?");
+            _inputOutput.WriteLine("Do you have E-Registration?");
            
             return AskYesOrNo();
         }
