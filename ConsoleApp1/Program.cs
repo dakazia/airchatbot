@@ -29,6 +29,12 @@ namespace CheckIn
                 BaggageRegistrationDesk baggageRegistrationDesk = new BaggageRegistrationDesk(new ConsoleInputOutput(), new InMemoryAirFlightRepository());
                 BaggageLabel baggageLabel = new BaggageLabel(baggageRegistrationDesk.WeightBaggage());
             }
+
+            SecurityCheckDesk securityCheckDesk = new SecurityCheckDesk(new ConsoleInputOutput());
+
+            securityCheckDesk.CheckPassenger(passenger);
+            securityCheckDesk.ExcludedForbiddenItems(passenger);
+            
         }
     }
 }

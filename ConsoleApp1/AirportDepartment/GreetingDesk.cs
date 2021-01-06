@@ -1,7 +1,5 @@
 ﻿using CheckIn.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CheckIn.AirportDepartment
 {
@@ -37,21 +35,21 @@ namespace CheckIn.AirportDepartment
                 timeOfDay = "Good night!";
             }
 
-            _inputOutput.WriteLine($"{timeOfDay} Welcome to Minsk Airport. Please introduce yourself.");
+            _inputOutput.WriteLine($">> {timeOfDay} Welcome to Minsk Airport. Please introduce yourself.");
 
             return _inputOutput.ReadLine();
         }
 
         public bool CheckERegistration()
         {
-            _inputOutput.WriteLine("Do you have E-Registration?");
+            _inputOutput.WriteLine(">> Do you have E-Registration?");
            
             return AskYesOrNo();
         }
 
         public bool CheckBaggage()
         {
-            _inputOutput.WriteLine("Do you have any baggage for registration?");
+            _inputOutput.WriteLine(">> Do you have any baggage for registration?");
 
             return AskYesOrNo();
         }
@@ -61,7 +59,7 @@ namespace CheckIn.AirportDepartment
             string answer;
             do
             {
-                _inputOutput.WriteLine("Please, enter Y or N.");
+                _inputOutput.WriteLine(">> Please, enter Y or N.");
                 answer = _inputOutput.ReadLine();
 
             } while (!(answer.Equals("Y") || answer.Equals("N")));
