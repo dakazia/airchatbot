@@ -12,8 +12,6 @@ namespace CheckIn.AirportDepartment
         private static readonly string[] ForbiddenItems = new string[]
             {"sword", "dagger", "saber", "knife", "scissors", "weapon"};
 
-        private readonly List<string> _itemsToBeExcluded = new List<string>();
-
         public SecurityCheckDesk(IInputOutput inputOutput)
         {
             _inputOutput = inputOutput;
@@ -21,12 +19,14 @@ namespace CheckIn.AirportDepartment
 
         public SecurityCheckResult CheckPassenger(Passenger passenger)
         {
+            List<string> itemsToBeExcluded = new List<string>();
+
             foreach (var item in passenger.PersonalBelongings.Where(item => ForbiddenItems.Contains(item)))
             {
-                _itemsToBeExcluded.Add(item);
+                itemsToBeExcluded.Add(item);
             }
 
-            if (_itemsToBeExcluded.Count == 0)
+            if (itemsToBeExcluded.Count == 0)
             {
                 _inputOutput.WriteLine(">> It's okay, now you've gone through Passport control");
                 return new SecurityCheckResult(true);
@@ -36,7 +36,7 @@ namespace CheckIn.AirportDepartment
                 _inputOutput.WriteLine(
                     ">> This items is not allowed on board the aircraft. You need to leave it for control. Here is:");
 
-                foreach (var item in _itemsToBeExcluded)
+                foreach (var item in itemsToBeExcluded)
                 {
                     _inputOutput.WriteLine(item);
                 }
@@ -53,7 +53,7 @@ namespace CheckIn.AirportDepartment
 
                 if (answer.Equals("Y"))
                 {
-                    foreach (var item in _itemsToBeExcluded)
+                    foreach (var item in itemsToBeExcluded)
                     {
                         passenger.PersonalBelongings.Remove(item);
                     }
