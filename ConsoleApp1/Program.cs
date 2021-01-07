@@ -33,7 +33,6 @@ namespace CheckIn
             SecurityCheckDesk securityCheckDesk = new SecurityCheckDesk(new ConsoleInputOutput());
 
             securityCheckDesk.CheckPassenger(passenger);
-            securityCheckDesk.ExcludedForbiddenItems(passenger);
             
         }
     }

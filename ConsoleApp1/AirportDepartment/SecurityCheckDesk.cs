@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using CheckIn.Services;
 
 namespace CheckIn.AirportDepartment
@@ -10,49 +9,34 @@ namespace CheckIn.AirportDepartment
     {
         private readonly IInputOutput _inputOutput;
 
-        public string[] ForbiddenItems { get; } = new string[]
+        private static readonly string[] ForbiddenItems = new string[]
             {"sword", "dagger", "saber", "knife", "scissors", "weapon"};
 
-        public List<string> ItemsToBeExcluded { get; set; } = new List<string>();
+        private readonly List<string> _itemsToBeExcluded = new List<string>();
 
         public SecurityCheckDesk(IInputOutput inputOutput)
         {
             _inputOutput = inputOutput;
         }
 
-        public List<string> CheckPassenger(Passenger passenger)
+        public SecurityCheckResult CheckPassenger(Passenger passenger)
         {
-            foreach (var item in passenger.PersonalBelongings)
+            foreach (var item in passenger.PersonalBelongings.Where(item => ForbiddenItems.Contains(item)))
             {
-                if (ForbiddenItems.Contains(item))
-                {
-                    ItemsToBeExcluded.Add(item);
-                }
+                _itemsToBeExcluded.Add(item);
             }
 
-            return ItemsToBeExcluded;
-        }
-
-        public SecurityCheckResult ExcludedForbiddenItems(Passenger passenger)
-        {
-            bool result;
-
-            if (ItemsToBeExcluded is null)
-            {
-                throw new ArgumentNullException(nameof(ItemsToBeExcluded));
-            }
-
-            if (ItemsToBeExcluded.Count == 0)
+            if (_itemsToBeExcluded.Count == 0)
             {
                 _inputOutput.WriteLine(">> It's okay, now you've gone through Passport control");
-                result = true;
+                return new SecurityCheckResult(true);
             }
             else
             {
                 _inputOutput.WriteLine(
                     ">> This items is not allowed on board the aircraft. You need to leave it for control. Here is:");
 
-                foreach (var item in ItemsToBeExcluded)
+                foreach (var item in _itemsToBeExcluded)
                 {
                     _inputOutput.WriteLine(item);
                 }
@@ -69,23 +53,20 @@ namespace CheckIn.AirportDepartment
 
                 if (answer.Equals("Y"))
                 {
-                    foreach (var item in ItemsToBeExcluded)
+                    foreach (var item in _itemsToBeExcluded)
                     {
                         passenger.PersonalBelongings.Remove(item);
                     }
 
                     _inputOutput.WriteLine(">> It's okay, now you've gone through Passport control");
-                    result = true;
+                    return new SecurityCheckResult(true);
                 }
                 else
                 {
                     _inputOutput.WriteLine(
                         ">> Unfortunately, you cannot bring these items on board. You need to leave the departure area.");
-                    result = false;
+                    return new SecurityCheckResult(false);
                 }
-            }
-
-            return new SecurityCheckResult(result);
             }
         }
 
@@ -99,4 +80,5 @@ namespace CheckIn.AirportDepartment
             }
         }
     }
+}
 
