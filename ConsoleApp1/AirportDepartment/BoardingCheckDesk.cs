@@ -1,6 +1,0 @@
-﻿namespace CheckIn
-{
-    class BoardingCheckDesk
-    {
-    }
-}
