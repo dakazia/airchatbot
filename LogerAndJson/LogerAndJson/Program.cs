@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Serilog;
 using Serilog.Core;
-using log4net;
-using log4net.Config;
+
 
 namespace HW._15
 {
     internal class Program
     {
+
         static void ShowMotoCollection(IEnumerable<Motorcycle> motorcycles)
         {
-            Logger.Log.Info("Motorcycle collection was shown on the console");
 
             foreach (Motorcycle motorcycle in motorcycles)
             {
@@ -22,17 +23,34 @@ namespace HW._15
 
         private static void ShowMoto(Motorcycle motorcycle)
         {
-            Logger.Log.Info("Motorcycle instance was shown on the console");
 
             Console.WriteLine($"{motorcycle.Id} {motorcycle.Model}, {motorcycle.Year}, {motorcycle.Odometer} \n");
         }
 
+        static string Path()
+        {
+            string path = "C:\\MotoRepository\\Log\\";
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+                directoryInfo.Create();
+
+            return $"{path}Log.txt";
+        }
+
         private static void Main(string[] args)
         {
-            Logger.InitLogger();
-            Logger.Log.Info("The program started");
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File(Path(), rollingInterval: RollingInterval.Hour)
+                .CreateLogger();	                
+
+
+            Log.Information("HW._15.App is started."); 
 
             InMemoryMotoRepository inMemoryMotoRepository = new InMemoryMotoRepository();
+            Log.Information("List Repository is created." );
 
             ShowMotoCollection(inMemoryMotoRepository.GetAll());
 
@@ -41,21 +59,26 @@ namespace HW._15
             Guid testId = testMotorcycle.Id;
 
             inMemoryMotoRepository.Create(testMotorcycle);
+            Log.Information($"{testMotorcycle.Model}is created and added in the List Repository.");
 
             ShowMotoCollection(inMemoryMotoRepository.GetAll());
 
             ShowMoto(inMemoryMotoRepository.GetById(testId));
 
             Motorcycle motorcycleUpdate = new Motorcycle(testId, "KTM EXC450", 2003, 55000);
+            
 
             inMemoryMotoRepository.Update(motorcycleUpdate);
+            Log.Information($"{motorcycleUpdate.Model} is updated.");
 
             ShowMotoCollection(inMemoryMotoRepository.GetAll());
 
             inMemoryMotoRepository.Delete(testId);
+            Log.Information($"Motorcycle with ID: {testId} is deleted.");
 
             ShowMotoCollection(inMemoryMotoRepository.GetAll());
 
+            Console.WriteLine("From Json");
 
             FileMotoRepository fileMotoRepository = new FileMotoRepository();
 
@@ -64,6 +87,7 @@ namespace HW._15
             Guid testFileId = testFileMotorcycle.Id;
 
             fileMotoRepository.Create(testFileMotorcycle);
+            Log.Information("File Repository is created.");
 
             ShowMotoCollection(fileMotoRepository.GetAll());
             ShowMoto(fileMotoRepository.GetById(testFileId));
@@ -71,12 +95,16 @@ namespace HW._15
             Motorcycle motorcycleFileUpdate = new Motorcycle(testId, "Suzuki RF40RV", 2003, 55000);
 
             fileMotoRepository.Update(motorcycleFileUpdate);
+            Log.Information($"{motorcycleFileUpdate.Model} is updated.");
 
             ShowMotoCollection(fileMotoRepository.GetAll());
 
-            //fileMotoRepository.Delete(testFileId);
+            fileMotoRepository.Delete(testFileId);
+            Log.Information($"Motorcycle with ID: {testId} is deleted.");
 
             ShowMotoCollection(fileMotoRepository.GetAll());
+
+            Log.Information("HW._15.App is finished.");
         }
     }
 }

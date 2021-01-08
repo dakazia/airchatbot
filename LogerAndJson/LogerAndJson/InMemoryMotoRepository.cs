@@ -13,16 +13,12 @@ namespace HW._15
         
         public void Create(Motorcycle item)
         {
-            Logger.Log.Info($"Item {item.Id} was created");
-
             Motorcycles.Add(item);
         }
 
         public void Delete(Guid id)
         {
-            Logger.Log.Info($"Item {id} was deleted");
-
-            Motorcycles.Remove(GetById(id));
+           Motorcycles.Remove(GetById(id));
         }
 
         public IEnumerable<Motorcycle> GetAll()
@@ -47,9 +43,7 @@ namespace HW._15
 
         public void Update(Motorcycle motorcycle)
         {
-            Logger.Log.Info($"Item {motorcycle.Id} was updated");
-
-            int index = 0;
+          int index = 0;
             for (int i = 0; i < Motorcycles.Count; i++)
             {
                 if (Motorcycles[i].Id == motorcycle.Id)

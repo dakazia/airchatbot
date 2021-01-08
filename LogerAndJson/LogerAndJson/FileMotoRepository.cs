@@ -71,7 +71,7 @@ namespace HW._15
             }
             else
             {
-                Console.WriteLine("Error. File not found.");
+               // Console.WriteLine("Error. File not found.");
                 return new Motorcycle();
             }
         }

@@ -6,10 +6,10 @@ namespace HW._15
 {
     internal class Motorcycle
     {
-        public string Model { get; private set; }
-        public int Year { get; private set; }
-        public Guid Id { get; private set; }
-        public int Odometer { get; private set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+        public Guid Id { get; set; }
+        public int Odometer { get; set; }
 
         internal Motorcycle()
         {
