@@ -1,4 +1,4 @@
-﻿namespace CheckIn
+﻿namespace CheckIn.AirportDepartment
 {
     class BoardingCheckDesk
     {
