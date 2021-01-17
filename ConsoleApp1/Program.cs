@@ -20,7 +20,7 @@ namespace CheckIn
                 }
                 else
                 {
-                    return;
+                    greeting.StopRegistration();
                 }
             }
 
@@ -32,7 +32,11 @@ namespace CheckIn
 
             SecurityCheckDesk securityCheckDesk = new SecurityCheckDesk(new ConsoleInputOutput());
 
-            securityCheckDesk.CheckPassenger(passenger);
+            if (!securityCheckDesk.CheckPassenger(passenger).IsOkay)
+            {
+                greeting.StopRegistration();
+                
+            }
             
         }
     }

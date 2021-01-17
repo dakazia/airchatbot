@@ -66,6 +66,11 @@ namespace CheckIn.AirportDepartment
 
             return answer.Equals("Y");
         }
+
+        public void StopRegistration()
+        {
+            _inputOutput.WriteLine(">> To our regret, you cannot proceed with the check-in for the flight.");
+        }
     }
 }
 
