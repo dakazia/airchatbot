@@ -16,10 +16,7 @@ namespace CheckIn.AirportDepartment
 
         public bool CheckIn(Passenger passenger)
         {
-            _inputOutput.WriteLine($">> Dear {passenger.FullName}, please enter your passportID.");
-            string passportId = _inputOutput.ReadLine();
-
-            if (_airFlightRepository.CheckBooking(passportId))
+            if (_airFlightRepository.CheckBooking(passenger.PassportNumber))
             {
                 _inputOutput.WriteLine(">> Thank you, all is ok.");
                 return true;

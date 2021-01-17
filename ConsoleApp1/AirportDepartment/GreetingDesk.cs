@@ -12,7 +12,7 @@ namespace CheckIn.AirportDepartment
             _inputOutput = inputOutput;
         }
 
-        public string Greet()
+        public void Greet()
         {
             int timeNow = DateTime.Now.TimeOfDay.Hours;
 
@@ -35,15 +35,25 @@ namespace CheckIn.AirportDepartment
                 timeOfDay = "Good night!";
             }
 
-            _inputOutput.WriteLine($">> {timeOfDay} Welcome to Minsk Airport. Please introduce yourself.");
+            _inputOutput.WriteLine($">> {timeOfDay} Welcome to Minsk Airport.");
+        }
 
+        public string GetFullName()
+        {
+            _inputOutput.WriteLine(">> Please introduce yourself.");
+            return _inputOutput.ReadLine();
+        }
+
+        public string GetPassportId()
+        {
+            _inputOutput.WriteLine(">> Please enter your passportId.");
             return _inputOutput.ReadLine();
         }
 
         public bool CheckERegistration()
         {
             _inputOutput.WriteLine(">> Do you have E-Registration?");
-           
+
             return AskYesOrNo();
         }
 

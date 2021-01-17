@@ -8,8 +8,10 @@ namespace CheckIn
         private static void Main(string[] args)
         {
             GreetingDesk greeting = new GreetingDesk(new ConsoleInputOutput());
-            string fullName = greeting.Greet();
-            Passenger passenger = new Passenger(fullName);
+            greeting.Greet();
+            string fullName = greeting.GetFullName();
+            string passportId = greeting.GetPassportId();
+            Passenger passenger = new Passenger(fullName, passportId);
 
             if (!greeting.CheckERegistration())
             {
@@ -21,6 +23,7 @@ namespace CheckIn
                 else
                 {
                     greeting.StopRegistration();
+                    return;
                 }
             }
 
@@ -35,9 +38,17 @@ namespace CheckIn
             if (!securityCheckDesk.CheckPassenger(passenger).IsOkay)
             {
                 greeting.StopRegistration();
-                
+                return;
+
             }
-            
+
+            PassportControlDesk passportControlDesk = new PassportControlDesk(new ConsoleInputOutput());
+            if (!passportControlDesk.CheckPassport(passenger).IsOkay)
+            {
+                greeting.StopRegistration();
+                return;
+            }
+
         }
     }
 }

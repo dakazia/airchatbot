@@ -19,9 +19,10 @@ namespace CheckIn
 
         public List<string> PersonalBelongings { get => _personalBelongings; }
 
-        public Passenger(string fullName)
+        public Passenger(string fullName, string passportId)
         {
             FullName = fullName;
+            PassportNumber = passportId;
 
             AllPossibleItems = _allPossibleItems;
 

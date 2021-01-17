@@ -32,9 +32,9 @@ namespace CheckIn.AirportDepartment
             return new PassportCheckResult(true);
         }
 
-        private bool CheckForDepartureBan(string passportID)
+        private bool CheckForDepartureBan(string passportId)
         {
-            if (!int.TryParse(passportID[2..], out int numberPassportId))
+            if (!int.TryParse(passportId[2..], out int numberPassportId))
             {
                 _inputOutput.WriteLine("You are not a citizen of the Republic of Belarus," +
                                        " you have made a wrong choice of the way to pass the passport control.");
