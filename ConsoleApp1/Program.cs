@@ -11,7 +11,8 @@ namespace CheckIn
             greeting.Greet();
             string fullName = greeting.GetFullName();
             string passportId = greeting.GetPassportId();
-            Passenger passenger = new Passenger(fullName, passportId);
+            bool eRegistration = greeting.CheckERegistration();
+            Passenger passenger = new Passenger(fullName, passportId, eRegistration);
 
             if (!greeting.CheckERegistration())
             {
@@ -25,6 +26,10 @@ namespace CheckIn
                     greeting.StopRegistration();
                     return;
                 }
+            }
+            else
+            {
+                BoardingPass eBoardingPass = passenger.BoardingPass;
             }
 
             if (greeting.CheckBaggage())
@@ -44,6 +49,13 @@ namespace CheckIn
 
             PassportControlDesk passportControlDesk = new PassportControlDesk(new ConsoleInputOutput());
             if (!passportControlDesk.CheckPassport(passenger).IsOkay)
+            {
+                greeting.StopRegistration();
+                return;
+            }
+
+            BoardingCheckDesk boardingCheckDesk = new BoardingCheckDesk(new ConsoleInputOutput(), new InMemoryAirFlightRepository());
+            if (!boardingCheckDesk.CheckBoardingPass(passenger).IsOkay)
             {
                 greeting.StopRegistration();
                 return;

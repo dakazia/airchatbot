@@ -72,7 +72,7 @@ namespace CheckIn.AirportDepartment
 
         internal class SecurityCheckResult
         {
-            public bool IsOkay { get; set; }
+            public bool IsOkay { get; private set; }
 
             public SecurityCheckResult(bool result)
             {
