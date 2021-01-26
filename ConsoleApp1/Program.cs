@@ -1,4 +1,5 @@
 ﻿using CheckIn.AirportDepartment;
+using CheckIn.AirportDepartment.Table;
 using CheckIn.Services;
 
 namespace CheckIn
@@ -9,6 +10,8 @@ namespace CheckIn
         {
             GreetingDesk greeting = new GreetingDesk(new ConsoleInputOutput());
             greeting.Greet();
+            TableDeparture tableDeparture = new TableDeparture(new ConsoleInputOutput());
+            tableDeparture.ShowTable(tableDeparture.WriteDataToTable());
             string fullName = greeting.GetFullName();
             string passportId = greeting.GetPassportId();
             bool eRegistration = greeting.CheckERegistration();
@@ -60,7 +63,6 @@ namespace CheckIn
                 greeting.StopRegistration();
                 return;
             }
-
         }
     }
 }

@@ -13,7 +13,7 @@ namespace CheckIn
 
         private readonly List<string> _personalBelongings = new List<string>();
         public string[] AllPossibleItems { get; set; }
-        public string[] AllPossibleSeats { get; set; }
+        public string[] AllPossibleSeats { get => _allPossibleSeats; }
         public string FullName { get; set; }
 
         public string PassportNumber { get; set; }
