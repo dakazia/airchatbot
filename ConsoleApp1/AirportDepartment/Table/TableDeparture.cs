@@ -18,22 +18,24 @@ namespace CheckIn.AirportDepartment.Table
         {
             _inputOutput = inputOutput;
         }
-        
+
 
         public List<FlightItem<int>> WriteDataToTable()
         {
             try
             {
-                List<FlightItem<int>> restoredFlightItems = JsonSerializer.Deserialize<List<FlightItem<int>>>(File.ReadAllText(Path));
+                List<FlightItem<int>> restoredFlightItems =
+                    JsonSerializer.Deserialize<List<FlightItem<int>>>(File.ReadAllText(Path));
+                
                 return restoredFlightItems;
             }
             catch (IOException ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                _inputOutput.WriteLine(ex.StackTrace);
                 throw;
             }
         }
-
+        
         public void ShowTable(List<FlightItem<int>> table)
         {
             string answer;
@@ -43,13 +45,14 @@ namespace CheckIn.AirportDepartment.Table
                 answer = _inputOutput.ReadLine();
 
             } while (!(answer.Equals("5") || answer.Equals("10")));
-          
-            
+
+
             Count = int.Parse(answer);
 
             for (int i = 0; i < Count; i++)
             {
-                Console.WriteLine($"|Position: {table[i].Id}, Direction: {table[i].Direction}, Airline: {table[i].Airline}, Flight: {table[i].Flight}, Departure time: {table[i].TimeDeparture}|");
+                Console.WriteLine(
+                    $"|Position: {table[i].Id}, Direction: {table[i].Direction}, Airline: {table[i].Airline}, Flight: {table[i].Flight}, Departure time: {table[i].TimeDeparture}|");
             }
         }
     }
