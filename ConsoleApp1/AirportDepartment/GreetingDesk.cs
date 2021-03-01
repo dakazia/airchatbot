@@ -40,14 +40,28 @@ namespace CheckIn.AirportDepartment
 
         public string GetFullName()
         {
-            _inputOutput.WriteLine(">> Please introduce yourself.");
-            return _inputOutput.ReadLine();
+            string answer;
+            do
+            {
+                _inputOutput.WriteLine("\n>> Please introduce yourself.");
+                answer = _inputOutput.ReadLine();
+
+            } while (string.IsNullOrEmpty(answer) || string.IsNullOrWhiteSpace(answer));
+            
+            return answer;
         }
 
         public string GetPassportId()
         {
-            _inputOutput.WriteLine(">> Please enter your passportId.");
-            return _inputOutput.ReadLine();
+            string answer;
+            do
+            {
+                _inputOutput.WriteLine(">> Please enter your passportId.");
+                answer = _inputOutput.ReadLine();
+
+            } while (string.IsNullOrEmpty(answer) || string.IsNullOrWhiteSpace(answer)) ;
+
+            return answer;
         }
 
         public bool CheckERegistration()

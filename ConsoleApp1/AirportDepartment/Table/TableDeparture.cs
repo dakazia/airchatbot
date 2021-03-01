@@ -41,12 +41,12 @@ namespace CheckIn.AirportDepartment.Table
             string answer;
             do
             {
-                _inputOutput.WriteLine(">> Select the number of first flights displayed: 5 or 10");
+                _inputOutput.WriteLine(">> To display the departure board select the number of first flights displayed: 5 or 10");
                 answer = _inputOutput.ReadLine();
 
             } while (!(answer.Equals("5") || answer.Equals("10")));
 
-
+            _inputOutput.WriteLine(">> The Departure board:");
             Count = int.Parse(answer);
 
             for (int i = 0; i < Count; i++)

@@ -17,7 +17,7 @@ namespace CheckIn
             bool eRegistration = greeting.CheckERegistration();
             Passenger passenger = new Passenger(fullName, passportId, eRegistration);
 
-            if (!greeting.CheckERegistration())
+            if (!eRegistration)
             {
                 CheckInDesk checkInDesk = new CheckInDesk(new ConsoleInputOutput(), new InMemoryAirFlightRepository());
                 if (checkInDesk.CheckIn(passenger))
